@@ -1,8 +1,10 @@
 package com.afs.restapi.service;
 
+import com.afs.restapi.dto.CompanyRequest;
 import com.afs.restapi.entity.Company;
 import com.afs.restapi.entity.Employee;
 import com.afs.restapi.exception.CompanyNotFoundException;
+import com.afs.restapi.mapper.CompanyMapper;
 import com.afs.restapi.repository.CompanyRepository;
 import com.afs.restapi.repository.EmployeeRepository;
 import org.springframework.data.domain.PageRequest;
@@ -42,7 +44,8 @@ public class CompanyService {
         companyRepository.save(toBeUpdatedCompany);
     }
 
-    public Company create(Company company) {
+    public Company create(CompanyRequest companyRequest) {
+        Company company = CompanyMapper.toEntity(companyRequest);
         return companyRepository.save(company);
     }
 
