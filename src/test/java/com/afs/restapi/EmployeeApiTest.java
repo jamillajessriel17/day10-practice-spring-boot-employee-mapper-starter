@@ -1,7 +1,6 @@
 package com.afs.restapi;
 
 import com.afs.restapi.dto.EmployeeRequest;
-import com.afs.restapi.dto.EmployeeResponse;
 import com.afs.restapi.dto.EmployeeUpdateRequest;
 import com.afs.restapi.entity.Employee;
 import com.afs.restapi.repository.EmployeeRepository;
