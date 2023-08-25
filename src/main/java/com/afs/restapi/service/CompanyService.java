@@ -40,8 +40,10 @@ public class CompanyService {
         return companyResponse;
     }
 
-    public List<Company> findByPage(Integer pageNumber, Integer pageSize) {
+    public List<CompanyResponse> findByPage(Integer pageNumber, Integer pageSize) {
         return companyRepository.findAll(PageRequest.of(pageNumber - 1, pageSize)).stream()
+                .map(CompanyMapper::toResponse)
+                .peek(companyResponse -> companyResponse.setEmployeeCount(getResponseEmployeeCount(companyResponse.getId())))
                 .collect(Collectors.toList());
     }
 
