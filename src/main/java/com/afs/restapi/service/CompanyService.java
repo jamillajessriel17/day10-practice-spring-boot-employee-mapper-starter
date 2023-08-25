@@ -2,10 +2,12 @@ package com.afs.restapi.service;
 
 import com.afs.restapi.dto.CompanyRequest;
 import com.afs.restapi.dto.CompanyResponse;
+import com.afs.restapi.dto.EmployeeResponse;
 import com.afs.restapi.entity.Company;
 import com.afs.restapi.entity.Employee;
 import com.afs.restapi.exception.CompanyNotFoundException;
 import com.afs.restapi.mapper.CompanyMapper;
+import com.afs.restapi.mapper.EmployeeMapper;
 import com.afs.restapi.repository.CompanyRepository;
 import com.afs.restapi.repository.EmployeeRepository;
 import org.springframework.data.domain.PageRequest;
@@ -63,8 +65,10 @@ public class CompanyService {
     }
 
 
-    public List<Employee> findEmployeesByCompanyId(Long id) {
-        return employeeRepository.findAllByCompanyId(id);
+    public List<EmployeeResponse> findEmployeesByCompanyId(Long id) {
+        return employeeRepository.findAllByCompanyId(id).stream()
+                .map(EmployeeMapper::toResponse)
+                .collect(Collectors.toList());
     }
 
     public void delete(Long id) {
@@ -72,7 +76,7 @@ public class CompanyService {
     }
 
     private Integer getResponseEmployeeCount(Long id) {
-        List<Employee> employeesByCompanyId = findEmployeesByCompanyId(id);
+        List<EmployeeResponse> employeesByCompanyId = findEmployeesByCompanyId(id);
         if (employeesByCompanyId == null || employeesByCompanyId.isEmpty()) {
             return 0;
         }

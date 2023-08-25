@@ -2,6 +2,7 @@ package com.afs.restapi.controller;
 
 import com.afs.restapi.dto.CompanyRequest;
 import com.afs.restapi.dto.CompanyResponse;
+import com.afs.restapi.dto.EmployeeResponse;
 import com.afs.restapi.entity.Company;
 import com.afs.restapi.service.CompanyService;
 import com.afs.restapi.entity.Employee;
@@ -54,7 +55,7 @@ public class CompanyController {
     }
 
     @GetMapping("/{id}/employees")
-    public List<Employee> getEmployeesByCompanyId(@PathVariable Long id) {
+    public List<EmployeeResponse> getEmployeesByCompanyId(@PathVariable Long id) {
         return companyService.findEmployeesByCompanyId(id);
     }
 
