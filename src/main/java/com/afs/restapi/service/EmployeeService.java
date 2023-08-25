@@ -1,5 +1,6 @@
 package com.afs.restapi.service;
 
+import com.afs.restapi.EmployeeRequest;
 import com.afs.restapi.entity.Employee;
 import com.afs.restapi.exception.EmployeeNotFoundException;
 import com.afs.restapi.repository.EmployeeRepository;
@@ -43,7 +44,8 @@ public class EmployeeService {
         return employeeRepository.findAllByGender(gender);
     }
 
-    public Employee create(Employee employee) {
+    public Employee create(EmployeeRequest employeeRequest) {
+        Employee employee = EmployeeMapper.toEntity(employeeRequest);
         return employeeRepository.save(employee);
     }
 

@@ -61,19 +61,19 @@ class EmployeeApiTest {
 
     @Test
     void should_create_employee() throws Exception {
-        Employee employee = getEmployeeBob();
 
+        EmployeeRequest employeeRequest = new EmployeeRequest("Jess", 24, "male", 2342334, null);
         ObjectMapper objectMapper = new ObjectMapper();
-        String employeeRequest = objectMapper.writeValueAsString(employee);
+        String employeeRequestJSON = objectMapper.writeValueAsString(employeeRequest);
         mockMvc.perform(post("/employees")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(employeeRequest))
+                        .content(employeeRequestJSON))
                 .andExpect(MockMvcResultMatchers.status().is(201))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(notNullValue()))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value(employee.getName()))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.age").value(employee.getAge()))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.gender").value(employee.getGender()))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.salary").value(employee.getSalary()));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value(employeeRequest.getName()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.age").value(employeeRequest.getAge()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.gender").value(employeeRequest.getGender()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.salary").value(employeeRequest.getSalary()));
     }
 
     @Test

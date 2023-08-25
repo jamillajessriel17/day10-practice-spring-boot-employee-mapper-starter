@@ -1,5 +1,6 @@
 package com.afs.restapi.controller;
 
+import com.afs.restapi.EmployeeRequest;
 import com.afs.restapi.entity.Employee;
 import com.afs.restapi.service.EmployeeService;
 import org.springframework.http.HttpStatus;
@@ -46,8 +47,8 @@ public class EmployeeController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Employee createEmployee(@RequestBody Employee employee) {
-        return employeeService.create(employee);
+    public Employee EmployeeRequest(@RequestBody EmployeeRequest employeeRequest) {
+        return employeeService.create(employeeRequest);
     }
 
     @GetMapping(params = {"pageNumber", "pageSize"})
