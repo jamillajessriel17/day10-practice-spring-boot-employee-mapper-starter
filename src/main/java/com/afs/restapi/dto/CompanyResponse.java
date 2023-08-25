@@ -1,6 +1,5 @@
 package com.afs.restapi.dto;
 
-import com.afs.restapi.service.CompanyService;
 
 public class CompanyResponse {
 

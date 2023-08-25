@@ -46,18 +46,13 @@ public class CompanyService {
     }
 
     public CompanyResponse create(CompanyRequest companyRequest) {
-        Company company = CompanyMapper.toEntity(companyRequest);
-        Company savedCompany = companyRepository.save(company);
+        Company savedCompany = companyRepository.save(CompanyMapper.toEntity(companyRequest));
         CompanyResponse companyResponse = CompanyMapper.toResponse(savedCompany);
-        List<Employee> employeesByCompanyId = findEmployeesByCompanyId(companyResponse.getId());
+        companyResponse.setEmployeeCount(getResponseEmployeeCount(savedCompany.getId()));
 
-        if (employeesByCompanyId.isEmpty()) {
-            companyResponse.setEmployeeCount(0);
-            return companyResponse;
-        }
-        companyResponse.setEmployeeCount(employeesByCompanyId.size());
         return companyResponse;
     }
+
 
     public List<Employee> findEmployeesByCompanyId(Long id) {
         return employeeRepository.findAllByCompanyId(id);
@@ -65,5 +60,13 @@ public class CompanyService {
 
     public void delete(Long id) {
         companyRepository.deleteById(id);
+    }
+
+    private Integer getResponseEmployeeCount(Long id) {
+        List<Employee> employeesByCompanyId = findEmployeesByCompanyId(id);
+        if (employeesByCompanyId == null || employeesByCompanyId.isEmpty()) {
+            return 0;
+        }
+        return employeesByCompanyId.size();
     }
 }
