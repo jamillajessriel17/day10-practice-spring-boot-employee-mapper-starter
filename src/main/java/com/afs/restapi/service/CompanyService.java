@@ -4,7 +4,6 @@ import com.afs.restapi.dto.CompanyRequest;
 import com.afs.restapi.dto.CompanyResponse;
 import com.afs.restapi.dto.EmployeeResponse;
 import com.afs.restapi.entity.Company;
-import com.afs.restapi.entity.Employee;
 import com.afs.restapi.exception.CompanyNotFoundException;
 import com.afs.restapi.mapper.CompanyMapper;
 import com.afs.restapi.mapper.EmployeeMapper;
