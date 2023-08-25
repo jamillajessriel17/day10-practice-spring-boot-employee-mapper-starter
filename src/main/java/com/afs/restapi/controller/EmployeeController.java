@@ -2,6 +2,7 @@ package com.afs.restapi.controller;
 
 import com.afs.restapi.dto.EmployeeRequest;
 import com.afs.restapi.dto.EmployeeResponse;
+import com.afs.restapi.dto.EmployeeUpdateRequest;
 import com.afs.restapi.entity.Employee;
 import com.afs.restapi.mapper.EmployeeMapper;
 import com.afs.restapi.service.EmployeeService;
@@ -32,8 +33,8 @@ public class EmployeeController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateEmployee(@PathVariable Long id, @RequestBody Employee employee) {
-        employeeService.update(id, employee);
+    public void updateEmployee(@PathVariable Long id, @RequestBody EmployeeUpdateRequest employeeUpdateRequest) {
+        employeeService.update(id, employeeUpdateRequest);
     }
 
     @DeleteMapping("/{id}")

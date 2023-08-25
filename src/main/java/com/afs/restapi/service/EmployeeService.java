@@ -2,6 +2,7 @@ package com.afs.restapi.service;
 
 import com.afs.restapi.dto.EmployeeRequest;
 import com.afs.restapi.dto.EmployeeResponse;
+import com.afs.restapi.dto.EmployeeUpdateRequest;
 import com.afs.restapi.entity.Employee;
 import com.afs.restapi.exception.EmployeeNotFoundException;
 import com.afs.restapi.mapper.EmployeeMapper;
@@ -31,14 +32,14 @@ public class EmployeeService {
         return EmployeeMapper.toResponse(employee);
     }
 
-    public void update(Long id, Employee employee) {
+    public void update(Long id, EmployeeUpdateRequest employeeUpdateRequest) {
         Employee toBeUpdatedEmployee = employeeRepository.findById(id)
                 .orElseThrow(EmployeeNotFoundException::new);
-        if (employee.getSalary() != null) {
-            toBeUpdatedEmployee.setSalary(employee.getSalary());
+        if (employeeUpdateRequest.getSalary() != null) {
+            toBeUpdatedEmployee.setSalary(employeeUpdateRequest.getSalary());
         }
-        if (employee.getAge() != null) {
-            toBeUpdatedEmployee.setAge(employee.getAge());
+        if (employeeUpdateRequest.getAge() != null) {
+            toBeUpdatedEmployee.setAge(employeeUpdateRequest.getAge());
         }
         employeeRepository.save(toBeUpdatedEmployee);
     }
