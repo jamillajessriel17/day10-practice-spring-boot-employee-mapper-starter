@@ -38,8 +38,8 @@ public class CompanyController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateCompany(@PathVariable Long id, @RequestBody Company company) {
-        companyService.update(id, company);
+    public void updateCompany(@PathVariable Long id, @RequestBody CompanyRequest companyRequest) {
+        companyService.update(id, companyRequest);
     }
 
     @DeleteMapping("/{id}")

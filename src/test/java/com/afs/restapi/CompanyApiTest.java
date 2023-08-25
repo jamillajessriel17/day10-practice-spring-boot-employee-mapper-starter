@@ -1,15 +1,10 @@
 package com.afs.restapi;
 
 import com.afs.restapi.dto.CompanyRequest;
-import com.afs.restapi.dto.CompanyResponse;
-import com.afs.restapi.dto.EmployeeRequest;
-import com.afs.restapi.dto.EmployeeResponse;
 import com.afs.restapi.entity.Company;
 import com.afs.restapi.entity.Employee;
-import com.afs.restapi.mapper.EmployeeMapper;
 import com.afs.restapi.repository.CompanyRepository;
 import com.afs.restapi.repository.EmployeeRepository;
-import com.afs.restapi.service.EmployeeService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -70,8 +65,8 @@ class CompanyApiTest {
 
     @Test
     void should_update_company_name() throws Exception {
-        Company previousCompany = companyRepository.save(new Company(null, "Facebook"));
-        Company companyUpdateRequest = new Company(previousCompany.getId(), "Meta");
+        Company previousCompany = companyRepository.save(new Company(1L, "Facebook"));
+        CompanyRequest companyUpdateRequest = new CompanyRequest("Meta");
         ObjectMapper objectMapper = new ObjectMapper();
         String updatedEmployeeJson = objectMapper.writeValueAsString(companyUpdateRequest);
         mockMvc.perform(put("/companies/{id}", previousCompany.getId())
