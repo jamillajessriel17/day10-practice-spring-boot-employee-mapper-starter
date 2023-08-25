@@ -1,5 +1,6 @@
 package com.afs.restapi;
 
+import com.afs.restapi.dto.EmployeeRequest;
 import com.afs.restapi.entity.Employee;
 import com.afs.restapi.repository.EmployeeRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -73,7 +74,7 @@ class EmployeeApiTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.name").value(employeeRequest.getName()))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.age").value(employeeRequest.getAge()))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.gender").value(employeeRequest.getGender()))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.salary").value(employeeRequest.getSalary()));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.salary").doesNotExist());
     }
 
     @Test
