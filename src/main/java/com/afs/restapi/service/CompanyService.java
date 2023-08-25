@@ -1,6 +1,7 @@
 package com.afs.restapi.service;
 
 import com.afs.restapi.dto.CompanyRequest;
+import com.afs.restapi.dto.CompanyResponse;
 import com.afs.restapi.entity.Company;
 import com.afs.restapi.entity.Employee;
 import com.afs.restapi.exception.CompanyNotFoundException;
@@ -33,7 +34,7 @@ public class CompanyService {
     }
 
     public List<Company> findByPage(Integer pageNumber, Integer pageSize) {
-        return companyRepository.findAll(PageRequest.of(pageNumber-1, pageSize)).stream()
+        return companyRepository.findAll(PageRequest.of(pageNumber - 1, pageSize)).stream()
                 .collect(Collectors.toList());
     }
 
@@ -44,9 +45,18 @@ public class CompanyService {
         companyRepository.save(toBeUpdatedCompany);
     }
 
-    public Company create(CompanyRequest companyRequest) {
+    public CompanyResponse create(CompanyRequest companyRequest) {
         Company company = CompanyMapper.toEntity(companyRequest);
-        return companyRepository.save(company);
+        Company savedCompany = companyRepository.save(company);
+        CompanyResponse companyResponse = CompanyMapper.toResponse(savedCompany);
+        List<Employee> employeesByCompanyId = findEmployeesByCompanyId(companyResponse.getId());
+
+        if (employeesByCompanyId.isEmpty()) {
+            companyResponse.setEmployeeCount(0);
+            return companyResponse;
+        }
+        companyResponse.setEmployeeCount(employeesByCompanyId.size());
+        return companyResponse;
     }
 
     public List<Employee> findEmployeesByCompanyId(Long id) {
