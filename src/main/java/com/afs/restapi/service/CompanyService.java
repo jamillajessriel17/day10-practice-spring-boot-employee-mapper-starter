@@ -24,8 +24,12 @@ public class CompanyService {
         this.employeeRepository = employeeRepository;
     }
 
-    public List<Company> findAll() {
-        return companyRepository.findAll();
+    public List<CompanyResponse> findAll() {
+        return companyRepository.findAll().stream()
+                .map(CompanyMapper::toResponse)
+                .peek(companyResponse -> companyResponse.setEmployeeCount(getResponseEmployeeCount(companyResponse.getId())))
+                .collect(Collectors.toList());
+
     }
 
     public Company findById(Long id) {
