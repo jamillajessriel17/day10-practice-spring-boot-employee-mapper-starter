@@ -1,4 +1,4 @@
-package com.afs.restapi.service;
+package com.afs.restapi.mapper;
 
 import com.afs.restapi.EmployeeRequest;
 import com.afs.restapi.entity.Employee;
