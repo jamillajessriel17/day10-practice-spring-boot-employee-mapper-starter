@@ -35,8 +35,7 @@ public class CompanyService {
     public CompanyResponse findById(Long id) {
         Company company = companyRepository.findById(id)
                 .orElseThrow(CompanyNotFoundException::new);
-        CompanyResponse companyResponse = CompanyMapper.toResponse(company);
-        return companyResponse;
+        return CompanyMapper.toResponse(company);
     }
 
     public List<CompanyResponse> findByPage(Integer pageNumber, Integer pageSize) {
