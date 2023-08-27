@@ -28,7 +28,6 @@ public class CompanyService {
     public List<CompanyResponse> findAll() {
         return companyRepository.findAll().stream()
                 .map(CompanyMapper::toResponse)
-                .peek(companyResponse -> companyResponse.setEmployeeCount(getResponseEmployeeCount(companyResponse.getId())))
                 .collect(Collectors.toList());
 
     }
@@ -37,14 +36,12 @@ public class CompanyService {
         Company company = companyRepository.findById(id)
                 .orElseThrow(CompanyNotFoundException::new);
         CompanyResponse companyResponse = CompanyMapper.toResponse(company);
-        companyResponse.setEmployeeCount(getResponseEmployeeCount(company.getId()));
         return companyResponse;
     }
 
     public List<CompanyResponse> findByPage(Integer pageNumber, Integer pageSize) {
         return companyRepository.findAll(PageRequest.of(pageNumber - 1, pageSize)).stream()
                 .map(CompanyMapper::toResponse)
-                .peek(companyResponse -> companyResponse.setEmployeeCount(getResponseEmployeeCount(companyResponse.getId())))
                 .collect(Collectors.toList());
     }
 
@@ -57,10 +54,8 @@ public class CompanyService {
 
     public CompanyResponse create(CompanyRequest companyRequest) {
         Company savedCompany = companyRepository.save(CompanyMapper.toEntity(companyRequest));
-        CompanyResponse companyResponse = CompanyMapper.toResponse(savedCompany);
-        companyResponse.setEmployeeCount(getResponseEmployeeCount(savedCompany.getId()));
+        return CompanyMapper.toResponse(savedCompany);
 
-        return companyResponse;
     }
 
 
@@ -74,11 +69,4 @@ public class CompanyService {
         companyRepository.deleteById(id);
     }
 
-    private Integer getResponseEmployeeCount(Long id) {
-        List<EmployeeResponse> employeesByCompanyId = findEmployeesByCompanyId(id);
-        if (employeesByCompanyId == null || employeesByCompanyId.isEmpty()) {
-            return 0;
-        }
-        return employeesByCompanyId.size();
-    }
 }

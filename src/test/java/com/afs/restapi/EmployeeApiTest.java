@@ -94,6 +94,7 @@ class EmployeeApiTest {
         Optional<Employee> optionalEmployee = employeeRepository.findById(previousEmployee.getId());
         assertTrue(optionalEmployee.isPresent());
         Employee updatedEmployee = optionalEmployee.get();
+        System.out.println(updatedEmployee.getSalary());
         Assertions.assertEquals(employeeUpdateRequest.getAge(), updatedEmployee.getAge());
         Assertions.assertEquals(employeeUpdateRequest.getSalary(), updatedEmployee.getSalary());
         Assertions.assertEquals(previousEmployee.getId(), updatedEmployee.getId());

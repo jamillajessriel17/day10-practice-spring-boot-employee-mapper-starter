@@ -3,7 +3,10 @@ package com.afs.restapi.mapper;
 import com.afs.restapi.dto.CompanyRequest;
 import com.afs.restapi.dto.CompanyResponse;
 import com.afs.restapi.entity.Company;
+import com.afs.restapi.entity.Employee;
 import org.springframework.beans.BeanUtils;
+
+import java.util.List;
 
 public class CompanyMapper {
 
@@ -20,6 +23,8 @@ public class CompanyMapper {
     public static CompanyResponse toResponse(Company company) {
         CompanyResponse companyResponse = new CompanyResponse();
         BeanUtils.copyProperties(company, companyResponse);
+        List<Employee> employees = company.getEmployees();
+        companyResponse.setEmployeeCount(employees == null || employees.isEmpty()? 0 : employees.size());
         return companyResponse;
     }
 }
