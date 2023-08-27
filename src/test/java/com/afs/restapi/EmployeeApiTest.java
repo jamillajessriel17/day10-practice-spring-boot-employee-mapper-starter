@@ -1,7 +1,7 @@
 package com.afs.restapi;
 
-import com.afs.restapi.dto.EmployeeRequest;
-import com.afs.restapi.dto.EmployeeUpdateRequest;
+import com.afs.restapi.service.dto.EmployeeRequest;
+import com.afs.restapi.service.dto.EmployeeUpdateRequest;
 import com.afs.restapi.entity.Employee;
 import com.afs.restapi.repository.EmployeeRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;

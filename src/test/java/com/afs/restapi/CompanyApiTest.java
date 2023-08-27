@@ -1,6 +1,6 @@
 package com.afs.restapi;
 
-import com.afs.restapi.dto.CompanyRequest;
+import com.afs.restapi.service.dto.CompanyRequest;
 import com.afs.restapi.entity.Company;
 import com.afs.restapi.entity.Employee;
 import com.afs.restapi.repository.CompanyRepository;

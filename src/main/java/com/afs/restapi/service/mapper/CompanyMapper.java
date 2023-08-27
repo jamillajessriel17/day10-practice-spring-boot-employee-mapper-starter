@@ -1,7 +1,7 @@
-package com.afs.restapi.mapper;
+package com.afs.restapi.service.mapper;
 
-import com.afs.restapi.dto.CompanyRequest;
-import com.afs.restapi.dto.CompanyResponse;
+import com.afs.restapi.service.dto.CompanyRequest;
+import com.afs.restapi.service.dto.CompanyResponse;
 import com.afs.restapi.entity.Company;
 import com.afs.restapi.entity.Employee;
 import org.springframework.beans.BeanUtils;

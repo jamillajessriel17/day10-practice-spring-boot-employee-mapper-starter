@@ -1,4 +1,4 @@
-package com.afs.restapi.dto;
+package com.afs.restapi.service.dto;
 
 public class EmployeeUpdateRequest {
     private Integer age;

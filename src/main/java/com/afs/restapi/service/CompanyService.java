@@ -1,12 +1,12 @@
 package com.afs.restapi.service;
 
-import com.afs.restapi.dto.CompanyRequest;
-import com.afs.restapi.dto.CompanyResponse;
-import com.afs.restapi.dto.EmployeeResponse;
+import com.afs.restapi.service.dto.CompanyRequest;
+import com.afs.restapi.service.dto.CompanyResponse;
+import com.afs.restapi.service.dto.EmployeeResponse;
 import com.afs.restapi.entity.Company;
 import com.afs.restapi.exception.CompanyNotFoundException;
-import com.afs.restapi.mapper.CompanyMapper;
-import com.afs.restapi.mapper.EmployeeMapper;
+import com.afs.restapi.service.mapper.CompanyMapper;
+import com.afs.restapi.service.mapper.EmployeeMapper;
 import com.afs.restapi.repository.CompanyRepository;
 import com.afs.restapi.repository.EmployeeRepository;
 import org.springframework.data.domain.PageRequest;

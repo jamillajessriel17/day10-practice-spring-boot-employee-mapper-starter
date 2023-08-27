@@ -1,8 +1,8 @@
 package com.afs.restapi.controller;
 
-import com.afs.restapi.dto.CompanyRequest;
-import com.afs.restapi.dto.CompanyResponse;
-import com.afs.restapi.dto.EmployeeResponse;
+import com.afs.restapi.service.dto.CompanyRequest;
+import com.afs.restapi.service.dto.CompanyResponse;
+import com.afs.restapi.service.dto.EmployeeResponse;
 import com.afs.restapi.service.CompanyService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
